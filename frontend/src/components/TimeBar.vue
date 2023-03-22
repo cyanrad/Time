@@ -15,7 +15,7 @@
       :displace="nextArrow(period.Duration)"
       :h="computeHeight(period.Duration)"
       :type="period.Type"
-      :time="Math.floor(getSum() / 60) + 7 + ':' + (getSum() % 60)"
+      :time="Math.floor(getSum() / 60) + ':' + (getSum() % 60)"
       :get-type-color="getTypeColor"
     />
   </div>
@@ -44,7 +44,7 @@ export default {
   methods: {
     computeHeight(duration: number): number {
       let height: number = window.innerHeight;
-      const minutes: number = 900;
+      const minutes: number = 1440;
       let result = Math.round((duration / minutes) * height);
       return result != undefined ? result : 0;
     },

@@ -22,6 +22,7 @@ func NewServer(store *sqlx.DB) *Server {
 	router.POST("/periods", server.postPeriods)
 	router.PUT("/periods", server.putPeriods) // should be optimized
 	router.DELETE("/periods/:ID", server.deletePeriods)
+
 	router.GET("/achievements/:DateStamp", server.getAchievements)
 	router.POST("/achievements", server.postAchievements)
 	router.PUT("/achievements", server.putAchievements) // should be optimized

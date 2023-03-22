@@ -12,4 +12,9 @@ migratedown:
 migratenew:
 	migrate create -ext sql -dir ./backend/SQL -seq schema
 
-.PHONY: migrateup migratedown migratenew
+dockerdown:
+	docker compose down
+	docker image rm time_api
+	docker image rm time_website
+
+.PHONY: migrateup migratedown migratenew dockerdown

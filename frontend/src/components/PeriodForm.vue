@@ -168,7 +168,7 @@ export default {
           return;
         }
         let target = equation.target as HTMLInputElement;
-        let val = mexp.eval(target.value, [], []);
+        let val = mexp.eval(target.value, [], {});
         if (this.selectedPeriod.Date_Stamp == 0) {
           this.newPeriod.Duration = val;
         } else {

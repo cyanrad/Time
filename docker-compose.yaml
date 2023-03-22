@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15.1-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=bank
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - DB_SOURCE=postgresql://root:secret@postgres:5432/bank?sslmode=disable
+      - SERVER_ADDRESS=0.0.0.0:80
+    ports:
+      - 8084:80
+    depends_on:
+      - postgres
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
+    command: ["/app/main"]
+
+  website:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - 8085:80
